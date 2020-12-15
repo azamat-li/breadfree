@@ -20,5 +20,6 @@ Route::get('/', function () {
 
 // Projects
 Route::get('/projects', [ProjectsController::class, 'main'])->name('project.main');
+Route::get('/projects/{project}', [ProjectsController::class, 'show'])->name('project.show');
 Route::post('/projects', [ProjectsController::class, 'store']);
 

@@ -42,6 +42,20 @@ class ProjectsTest extends TestCase
         $this->get('/projects')->assertSee($attributes['title']);
     }
 
+
+    /**  @test */
+    public function a_user_can_view_a_project()
+    {
+
+        $project = Project::factory()->create();
+
+        $this->get('/projects/' . $project->id)
+            ->assertSee($project->title)
+            ->assertSee($project->description);
+
+    }
+
+
     /**  @test */
     public function a_project_requires_title()
     {
@@ -49,6 +63,7 @@ class ProjectsTest extends TestCase
 
         $this->post('/projects', $attributes)->assertSessionHasErrors('title');
     }
+
 
     /**  @test */
     public function a_project_requires_description()

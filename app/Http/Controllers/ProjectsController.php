@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Illuminate\Routing\Redirector;
 
 
 class ProjectsController extends Controller
@@ -12,7 +16,7 @@ class ProjectsController extends Controller
     /**
      * Display a listing of projects.
      *
-     * @return Response
+     * @return Appication|Foctory|View
      */
     public function main()
     {
@@ -22,10 +26,10 @@ class ProjectsController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created project in storage.
      *
      * @param Request $request
-     * @return Response
+     * @return Application|RedirectResponse|Response|Redirector
      */
     public function store(Request $request)
     {
@@ -36,19 +40,20 @@ class ProjectsController extends Controller
         return redirect('/projects');
     }
 
+
     /**
-     * Display the specified resource.
+     * Display the project.
      *
      * @param int $id
-     * @return Response
+     * @return Application|Factory|View|Response
      */
-    public function show($id)
+    public function show(Project $project)
     {
-        //
+        return view('projects.show', compact('project'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified project in storage.
      *
      * @param Request $request
      * @param int $id
@@ -60,7 +65,7 @@ class ProjectsController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified project from storage.
      *
      * @param int $id
      * @return Response
