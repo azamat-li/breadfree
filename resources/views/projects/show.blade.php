@@ -395,9 +395,11 @@
 </head>
 
 <body class="antialiased">
-<h1>Bread free project {{ $project->title }}</h1>
-<div> {{ $project->description }}</div>
+<h1>Bread free project</h1>
 
+<div>{{$project->title}}</div>
+
+<div>{{$project->description}}</div>
 
 <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">
     <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block"></div>
