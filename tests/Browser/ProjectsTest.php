@@ -3,7 +3,7 @@
 namespace Tests\Browser;
 
 use App\Models\Project;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\WithFaker;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
@@ -11,7 +11,7 @@ use Tests\DuskTestCase;
 class ProjectsTest extends DuskTestCase
 {
 
-    use RefreshDatabase, WithFaker;
+    use  WithFaker, DatabaseMigrations;
 
     /**  @test */
     public function user_can_access_projects(): void
@@ -22,7 +22,6 @@ class ProjectsTest extends DuskTestCase
         });
     }
 
-    //    TODO: drop database
     /**  @test */
 //    public function user_sees_no_projects_yet_if_no_projects_exitst()
 //    {
@@ -32,21 +31,28 @@ class ProjectsTest extends DuskTestCase
 //        });
 //    }
 
+//    TODO: refresh database
     /**  @test */
     public function user_can_access_project(): void
     {
-        Project::factory()->create();
+        $project1 = Project::factory()->create();
+        $project1->save();
 
-        $project = Project::find('1');
+//        $project1 = Project::find(3);
 
-        $this->browse(function (Browser $browser) use (&$project) {
-            $browser->visit('/projects/' . $project->id)
+//        $project1= Project::create([
+//            'title' => 'title1',
+//            'description' => 'description1'
+//        ]);
+
+        $this->browse(function (Browser $browser) use ($project1) {
+            $browser->visit($project1->path())
                 ->assertSee('Bread free project')
-                ->assertSee($project->title)
-                ->assertSee($project->description);
+                ->assertSee($project1->title)
+                ->assertSee($project1->description);
         });
 
-        $project->delete();
+        $project1->delete();
     }
 
     /**  @test */

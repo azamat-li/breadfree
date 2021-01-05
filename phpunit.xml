@@ -26,7 +26,7 @@
         <server name="SESSION_DRIVER" value="array"/>
         <server name="TELESCOPE_ENABLED" value="false"/>
 
-        <!-- For testing -->
+        <!-- For feature & unit testing -->
         <server name="DB_CONNECTION" value="sqlite"/>
         <server name="DB_DATABASE" value=":memory:"/>
     </php>

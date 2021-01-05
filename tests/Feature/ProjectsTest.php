@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Project;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -10,7 +11,7 @@ use Tests\TestCase;
 
 class ProjectsTest extends TestCase
 {
-    use WithFaker, RefreshDatabase;
+    use WithFaker, DatabaseMigrations;
 
     /**
      * A basic feature test example.
